@@ -1,3 +1,6 @@
 
 *.png
 *.keras
+/.venv
+*.jpg
+*.hdf5
