@@ -34,6 +34,6 @@ BATCH_NORM_EPSILON = 1e-5
 BATCH_NORM_DECAY = 0.997
 
 # Checkpoints parametes
-CHECKPOINT_PATH = 'Easter2-main\weights/EASTER2--{epoch:02d}--{loss:.02f}.hdf5'
+CHECKPOINT_PATH = 'Easter2-main\weights\EASTER2--{epoch:02d}--{loss:.02f}.hdf5'
 LOGS_DIR = 'Easter2-main\logs'
-BEST_MODEL_PATH = "Easter2-main\weights/saved_checkpoint.hdf5"
+BEST_MODEL_PATH = "Easter2-main\weights\saved_checkpoint.hdf5"

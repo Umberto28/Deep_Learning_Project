@@ -36,7 +36,9 @@ def load_easter_model(checkpoint_path):
             checkpoint.get_layer('the_input').input,
             checkpoint.get_layer('Final').output
         )
-    except:
+    except Exception as error:
+        # handle the exception
+        print("An exception occurred:", error)
         print ("Unable to Load Checkpoint.")
         return None
     return EASTER
