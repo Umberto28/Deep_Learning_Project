@@ -8,20 +8,6 @@ from tqdm import tqdm
 from data_loader import data_loader
 import tensorflow.keras.backend as K
 
-def ctc_custom(args):
-    y_pred, labels, input_length, label_length = args
-    
-    ctc_loss = K.ctc_batch_cost(
-        labels, 
-        y_pred, 
-        input_length, 
-        label_length
-    )
-    p = tensorflow.exp(-ctc_loss)
-    gamma = 0.5
-    alpha=0.25 
-    return alpha*(K.pow((1-p),gamma))*ctc_loss
-
 def load_easter_model(checkpoint_path):
     if checkpoint_path == "Empty":
         checkpoint_path = config.BEST_MODEL_PATH

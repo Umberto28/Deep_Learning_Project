@@ -210,7 +210,7 @@ def Easter2():
     )
     
     output = tensorflow.keras.layers.Lambda(
-        ctc_custom, output_shape=(1,),name='ctc'
+        ctc_loss, output_shape=(1,),name='ctc'
     )([y_pred, labels, input_length, label_length])
 
     # compiling model
