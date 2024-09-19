@@ -1,6 +1,0 @@
-tensorflow
-opencv-python
-matplotlib
-editdistance
-taco-box
-tqdm
