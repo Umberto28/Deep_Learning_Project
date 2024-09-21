@@ -6,7 +6,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Training')
     parser.add_argument('--resume', '-r', action="store_true",
                         help="resume training")
-    parser.add_argument('--base', '-b', choices=['children', 'adults'], default='children',
+    parser.add_argument('--base', '-b', choices=['children', 'adults'], default='adults',
                         help="set which dataset to load, either 'adults' or 'children'")
     parser.add_argument('--model', '-m', choices=['resnet', 'vit'], default='resnet',
                         help="set which model to use / train, either 'resnet' or 'vit'")  
@@ -14,7 +14,7 @@ if __name__ == '__main__':
                         help="use pen features stored in csv")
     parser.add_argument('--bhk', choices=['binary', 'float', 'double'], default='binary',
                         help="decide which csv to load, either 'binary, 'float' or 'double'")
-    parser.add_argument('--labels', '-l', choices=['certified', 'expert', 'professors'], default='certified',
+    parser.add_argument('--labels', '-l', choices=['certified', 'expert', 'professors'], default='professors',
                         help="decide which labels to load, either 'certified, 'expert' or 'professors'")
     parser.add_argument('--split', '-s', default=0,
                         help="which train/val/test split to load")

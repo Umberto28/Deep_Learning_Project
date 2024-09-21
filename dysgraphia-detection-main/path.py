@@ -1,8 +1,5 @@
 from pathlib import Path
 
-#! change here
-BASE = Path('')
-
 #? ML
 DEVICE = 'cpu'
 CHECKPOINTS = 'checkpoints'
@@ -14,5 +11,5 @@ SETS = IAM / 'SETS'
 DATA = IAM / 'DATA'
 
 #? Dysgraphia dataset
-DYSG = BASE / 'data'
+DYSG = Path('NoAugmentation')
 CSVS = DYSG / 'csv'

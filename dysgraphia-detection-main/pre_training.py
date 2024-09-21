@@ -6,11 +6,11 @@ from torch.nn import TripletMarginLoss
 import torch.optim as optim
 import time
 from math import inf
-import config
+import wandb
 from datetime import timedelta
 
-# wandb.init(project="dysgraphia", entity="-")
-# random.seed(42)
+wandb.init(project="dyslexia")
+random.seed(42)
 
 from model import ResnetWrapper, ViTWrapper
 from data import IAMDL
@@ -24,8 +24,8 @@ DATA = 'IAM/DATA'
 def train(args):
 
     # LOAD DATA
-    train_data = IAMDL('train', config.DATA_PATH, config.BATCH_SIZE)
-    validation_data = IAMDL('validation', config.DATA_PATH, config.BATCH_SIZE)
+    train_data = IAMDL('trainset', DEVICE)
+    validation_data = IAMDL('validationset', DEVICE)
 
     # LOAD MODEL
     # wrapper = ViTWrapper('pretrain', DEVICE, pretrain=True)
@@ -33,7 +33,7 @@ def train(args):
     model = wrapper.get_model()
 
     # TRAIN SETTINGS
-    epochs = 100
+    epochs = 150
     start_epoch = 0
     batch_size = 32
     best_val_loss = inf
@@ -47,11 +47,11 @@ def train(args):
         start_epoch, best_val_loss, exit_counter, opt_chk = wrapper.resume('pretrain_checkpoint.pth')
         opt.load_state_dict(opt_chk)
 
-    # wandb.config = {
-    #     "learning_rate": lr,
-    #     "epochs": epochs,
-    #     "batch_size": batch_size
-    # }
+    wandb.config = {
+        "learning_rate": lr,
+        "epochs": epochs,
+        "batch_size": batch_size
+    }
 
     print('Start Training')
     for e in range(start_epoch, epochs):
@@ -107,12 +107,12 @@ def train(args):
                 is_best = False
                 exit_counter += 1
             
-            # wandb.log({
-            #     "train-loss": train_loss,
-            #     "val-loss": val_loss
-            #     })
-            # # Optional
-            # wandb.watch(model)
+            wandb.log({
+                "train-loss": train_loss,
+                "val-loss": val_loss
+                })
+            # Optional
+            wandb.watch(model)
             
             state = {
                 'epoch': e + 1,

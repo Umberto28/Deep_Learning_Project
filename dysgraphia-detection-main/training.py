@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader
 import random
 import numpy as np
-from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, mean_squared_error
+from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, root_mean_squared_error
 import shap
 import torch
 from torch.utils.data import DataLoader
@@ -15,7 +15,7 @@ import wandb
 from datetime import timedelta
 from mlxtend.evaluate import accuracy_score
 
-wandb.init(project="dyslexia", entity="ailab-unifi")
+wandb.init(project="dyslexia")
 random.seed(42)
 
 from model import ViTWrapper, ResnetWrapper
@@ -25,12 +25,15 @@ from path import *
 def train(args):
 
     # LOAD DATA
-    if args.csv: model_name = f'{args.base}_{args.model}_{args.bhk}_{args.labels}_split{args.split}'
-    else: model_name = f'{args.base}_{args.model}_{args.labels}_split{args.split}'
+    if args.csv: 
+        model_name = f'{args.base}_{args.model}_{args.bhk}_{args.labels}_split{args.split}'
+    else: 
+        model_name = f'{args.base}_{args.model}_{args.labels}_split{args.split}'
     backbone = f'adults_{args.model}'
     out_classes = 2
-    if args.labels == 'professors': out_classes = 1
-
+    if args.labels == 'professors': 
+        out_classes = 1
+ 
     train_data = DysgraphiaDL(args.base, 'train', DEVICE, args.csv, args.bhk, args.labels, args.split)
     validation_data = DysgraphiaDL(args.base, 'validation', DEVICE, args.csv, args.bhk, args.labels, args.split)
     # print(train_data.pen_features)
@@ -50,7 +53,7 @@ def train(args):
     print(model)
 
     # TRAIN SETTINGS
-    epochs = 1000
+    epochs = 150
     start_epoch = 0
     batch_size = 8
     best_val_loss = inf
@@ -112,7 +115,7 @@ def train(args):
                 _, _, crit, _ = precision_recall_fscore_support(classes, preds, average=None, zero_division=1)
             else:
                 preds = torch.reshape(act(preds), (-1,)).cpu().detach().numpy()
-                crit = mean_squared_error(classes, preds, squared=False)
+                crit = root_mean_squared_error(classes, preds)
             train_crit += crit
             running_crit += crit
 
@@ -140,7 +143,7 @@ def train(args):
                 crit = f1[1]
             else:
                 preds = torch.reshape(act(preds), (-1,)).cpu()
-                crit = mean_squared_error(classes, preds, squared=False)
+                crit = root_mean_squared_error(classes, preds)
 
             val_crit = crit
             print(f"Epoch {e + 1}: Validation Loss {out.item()} - Validation Criteria {val_crit}")
@@ -233,7 +236,7 @@ def test(args, explain):
         print("Accuracy:", round(accuracy, 3))
     
     else:
-        mse = mean_squared_error(classes, preds, squared=False)
+        mse = root_mean_squared_error(classes, preds)
         print("Mean Squarred Error:", round(mse, 3))
 
     if explain:

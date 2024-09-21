@@ -20,13 +20,12 @@ def get_IAM_statistics():
     h = []
     w = []
     # images = []
-    set_dir = f'IAM/sentences'
-    for dir in os.listdir(set_dir):
-        dir_path = os.path.join(set_dir, dir)
-        for subdir in os.listdir(dir_path):
-            subdir_path = os.path.join(dir_path, subdir)
-            for image in os.listdir(subdir_path):
-                img_path = os.path.join(subdir_path, image)
+    for set in SETS:
+        set_dir = f'IAM/{set.split(".")[0]}'
+        for author in os.listdir(set_dir):
+            WRITINGS = os.path.join(set_dir, author)
+            for line in os.listdir(WRITINGS):
+                img_path = os.path.join(WRITINGS, line)
                 img = Image.open(img_path).convert('RGB')
                 # images.append(resize(pil_to_tensor(img) / 255., (128, 1024)))
                 img_size = img.size
@@ -61,8 +60,8 @@ def create_simple_splits(path):
         return
     else:
         print("Creating Simple splits.")
-    dis = [filename for filename in os.listdir(path) if 'X' in filename]
-    not_dis = [filename for filename in os.listdir(path) if 'O' in filename]
+    dis = [filename for filename in os.listdir(str(path)+"/Dysgraphic1") and os.listdir(str(path)+"/Dysgraphic2")]
+    not_dis = [filename for filename in os.listdir(str(path)+"/No_Dysgraphic1") and os.listdir(str(path)+"/No_Dysgraphic2")]
 
     test_dis = random.sample(dis, 3)
     validation = [random.choice(test_dis)]
@@ -75,15 +74,15 @@ def create_simple_splits(path):
     test_dis.extend(test_not_dis)
     train = [filename for filename in os.listdir(path) if filename not in test_dis]
 
-    with open(os.path.join('/'.join(path.split("/")[:-1]), 'train.txt'), 'w') as f:
+    with open(os.path.join('/'.join(str(path).split("/")[:-1]), 'train.txt'), 'w') as f:
         for t in train:
             f.write(f"{t}\n")
     
-    with open(os.path.join('/'.join(path.split("/")[:-1]), 'validation.txt'), 'w') as f:
+    with open(os.path.join('/'.join(str(path).split("/")[:-1]), 'validation.txt'), 'w') as f:
         for t in validation:
             f.write(f"{t}\n")
 
-    with open(os.path.join('/'.join(path.split("/")[:-1]), 'test.txt'), 'w') as f:
+    with open(os.path.join('/'.join(str(path).split("/")[:-1]), 'test.txt'), 'w') as f:
         for t in test_dis:
             f.write(f"{t}\n")
 
@@ -187,4 +186,3 @@ def get_bhk_features(filename = os.path.join(DYSG,'children/original/A01_1cb57/r
     return features, features.shape[0]
 
 # create_multiple_splits('/home1/gemelli/dysgraphia-detection/data/children', '/home1/gemelli/dysgraphia-detection/data/children/labels.csv')
-print(get_IAM_statistics())

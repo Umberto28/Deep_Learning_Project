@@ -4,6 +4,7 @@ import shutil
 from vit_pytorch import SimpleViT
 import os
 from torchvision.models import resnet18, ResNet18_Weights
+from torchsummary import summary
 
 from path import *
 
