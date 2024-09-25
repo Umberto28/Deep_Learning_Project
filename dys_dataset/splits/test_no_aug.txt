@@ -1,58 +1,58 @@
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00089.png
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00051.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (42).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (68).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00019.png
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (83).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (60).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (127).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00049.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (100).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (53).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (47).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (105).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (86).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00071.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (9).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (52).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (36).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00076.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (51).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (114).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (79).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (57).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00130.png
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (7).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00108.png
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00180.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (62).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (46).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00067.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (78).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (26).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (2).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (49).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (15).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (89).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (48).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (24).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (61).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00022.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (51).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (38).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (85).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00186.png
+../dys_dataset/NoAugmentation/Dysgraphic1/user00122.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (21).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (100).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00048.png
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (84).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (83).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (31).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (78).jpg
 ../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (37).jpg
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (65).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (104).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00006.png
-../dys_dataset/NoAugmentation/Dysgraphic1/user00128.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (74).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00168.png
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00078.png
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (121).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (26).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (70).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00054.png
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (75).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00184.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (54).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00114.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (122).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (13).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (4).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (128).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (101).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00150.png
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00167.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (115).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00092.png
 ../dys_dataset/NoAugmentation/Dysgraphic1/user00095.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (134).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (52).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (93).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00108.png
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00176.png
+../dys_dataset/NoAugmentation/Dysgraphic1/user00049.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (84).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00170.png
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (81).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (24).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00120.png
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00172.png
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00087.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (20).jpg
+../dys_dataset/NoAugmentation/Dysgraphic1/user00109.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (125).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (14).jpg
+../dys_dataset/NoAugmentation/Dysgraphic2/PD (55).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic1/user00158.png
+../dys_dataset/NoAugmentation/Dysgraphic1/user00112.png
+../dys_dataset/NoAugmentation/Dysgraphic1/user00008.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (25).jpg
 ../dys_dataset/NoAugmentation/Dysgraphic1/user00134.png
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (63).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (5).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (33).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (35).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00013.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (29).jpg
-../dys_dataset/NoAugmentation/Dysgraphic1/user00036.png
-../dys_dataset/NoAugmentation/Dysgraphic2/PD (11).jpg
-../dys_dataset/NoAugmentation/No_Dysgraphic1/user00163.png
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (40).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (74).jpg
+../dys_dataset/NoAugmentation/No_Dysgraphic2/Copia di LPD (30).jpg
