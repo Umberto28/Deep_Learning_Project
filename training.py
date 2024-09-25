@@ -11,12 +11,8 @@ from torch.nn import CrossEntropyLoss, Sigmoid, BCELoss, MSELoss, ReLU
 import torch.optim as optim
 import time
 from math import inf
-import wandb
 from datetime import timedelta
 from mlxtend.evaluate import accuracy_score
-
-wandb.init(project="dyslexia")
-random.seed(42)
 
 from model import ViTWrapper, ResnetWrapper
 from data import DysgraphiaDL
@@ -72,12 +68,6 @@ def train(args):
     if args.resume:
         start_epoch, best_val_loss, exit_counter, opt_chk, best_val_crit = wrapper.resume(f'{model_name}_checkpoint.pth')
         opt.load_state_dict(opt_chk)
-
-    wandb.config = {
-        "learning_rate": lr,
-        "epochs": epochs,
-        "batch_size": batch_size
-    }
 
     print('Start Training')
     for e in range(start_epoch, epochs):
@@ -153,15 +143,6 @@ def train(args):
                 print(f"    !- No improovement!")
                 is_best = False
                 exit_counter += 1
-            
-            wandb.log({
-                "train-loss": train_loss,
-                "val-loss": out.item(),
-                "train-criteria": train_crit,
-                "val-criteria": val_crit
-                })
-            # Optional
-            wandb.watch(model)
             
             state = {
                 'epoch': e + 1,
