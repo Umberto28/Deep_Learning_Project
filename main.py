@@ -4,14 +4,14 @@ from training import train, test
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Training')
-    parser.add_argument('--resume', '-r', action="store_true",
+    parser.add_argument('--resume_iam', '-ri', action="store_true",
                         help="resume training")
-    parser.add_argument('--base', '-b', choices=['children', 'adults'], default='adults',
-                        help="set which dataset to load, either 'adults' or 'children'")
+    parser.add_argument('--resume', '-r', action="store_false",
+                        help="resume training with no_augmented dataset")
     parser.add_argument('--model', '-m', choices=['resnet', 'vit'], default='resnet',
                         help="set which model to use / train, either 'resnet' or 'vit'")
-    parser.add_argument('--labels', '-l', choices=['certified', 'expert', 'professors'], default='professors',
-                        help="decide which labels to load, either 'certified, 'expert' or 'professors'")
+    parser.add_argument('--aug', '-a', choices=['aug', 'no_aug'], default='no_aug',
+                        help="set which dataset to use, either 'augmented' or 'no_augmented'")
     parser.add_argument('--split', '-s', default=0,
                         help="which train/val/test split to load")
     parser.add_argument('--weighted_loss', '-wl', action="store_true",

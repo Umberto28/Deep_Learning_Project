@@ -1,13 +1,9 @@
 import torch
 from torch.utils.data import DataLoader
-import random
 import numpy as np
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, root_mean_squared_error
 import shap
-import torch
-from torch.utils.data import DataLoader
-import random
-from torch.nn import CrossEntropyLoss, Sigmoid, BCELoss, MSELoss, ReLU
+from torch.nn import Sigmoid, BCELoss
 import torch.optim as optim
 import time
 from math import inf
@@ -21,25 +17,20 @@ from path import *
 def train(args):
 
     # LOAD DATA
-    model_name = f'{args.base}_{args.model}_{args.labels}_split{args.split}'
-    backbone = f'adults_{args.model}'
-    out_classes = 2
-    if args.labels == 'professors': 
-        out_classes = 1
+    model_name = f'{args.model}_{args.labels}_split{args.split}'
  
-    train_data = DysgraphiaDL(args.base, 'train', DEVICE, args.csv, args.bhk, args.labels, args.split)
-    validation_data = DysgraphiaDL(args.base, 'validation', DEVICE, args.csv, args.bhk, args.labels, args.split)
+    train_data = DysgraphiaDL(args.aug, 'train', DEVICE)
+    validation_data = DysgraphiaDL(args.aug, 'val', DEVICE)
     
     # LOAD MODEL
     if args.model == 'vit':
-        wrapper = ViTWrapper(model_name, DEVICE, 2, False, pen_features=train_data.pen_features)
+        wrapper = ViTWrapper(model_name, DEVICE, 2, False)
     elif args.model == 'resnet':
-        wrapper = ResnetWrapper(model_name, DEVICE, 2, False, pen_features=train_data.pen_features)
+        wrapper = ResnetWrapper(model_name, DEVICE, 2, False)
     else:
         raise Exception(f'{model} is not a model: selecte either vit or resnet.')
-    if args.base == 'children': wrapper.load_state(s = f'{backbone}_model_best.pth')
-    if out_classes == 1: wrapper.binary()
-    if args.csv: wrapper.set_csv_model(args.model)
+    
+    wrapper.binary()
     if args.freeze: wrapper.freeze()
     model = wrapper.get_model()
 
@@ -55,18 +46,18 @@ def train(args):
     epsilon = 0.001 # counter guard precision improovement
     lr = 0.00001
 
-    if out_classes != 1:
-        if args.weighted_loss: loss = CrossEntropyLoss(weight=train_data.get_binary_weights())
-        else: loss = CrossEntropyLoss()
-    else:
-        act = Sigmoid()
-        func = BCELoss()
-        loss = lambda x, y: func(torch.reshape(act(x), (-1,)), y.type(torch.float32))
+    act = Sigmoid()
+    func = BCELoss()
+    loss = lambda x, y: func(torch.reshape(act(x), (-1,)), y.type(torch.float32))
 
     opt = optim.AdamW(model.parameters(), lr=lr)
 
-    if args.resume:
+    if args.resume_iam:
         start_epoch, best_val_loss, exit_counter, opt_chk, best_val_crit = wrapper.resume(f'{model_name}_checkpoint.pth')
+        opt.load_state_dict(opt_chk)
+
+    if args.resume:
+        start_epoch, best_val_loss, exit_counter, opt_chk, best_val_crit = wrapper.resume(f'{args.model}_checkpoint.pth')
         opt.load_state_dict(opt_chk)
 
     print('Start Training')
@@ -85,8 +76,7 @@ def train(args):
             images, classes, pfeat = next(loader)
 
             opt.zero_grad()
-            if not args.csv: preds = model(images)
-            else: preds = model(images, pfeat)
+            preds = model(images)
 
             out = loss(preds, classes)
             out.backward()
@@ -97,12 +87,8 @@ def train(args):
 
             classes = np.asarray(classes.cpu())
 
-            if out_classes != 1:
-                preds = np.argmax(preds.cpu().detach().numpy(), axis=1)
-                _, _, crit, _ = precision_recall_fscore_support(classes, preds, average=None, zero_division=1)
-            else:
-                preds = torch.reshape(act(preds), (-1,)).cpu().detach().numpy()
-                crit = root_mean_squared_error(classes, preds)
+            preds = torch.reshape(act(preds), (-1,)).cpu().detach().numpy()
+            crit = root_mean_squared_error(classes, preds)
             train_crit += crit
             running_crit += crit
 
@@ -119,18 +105,13 @@ def train(args):
         with torch.no_grad():
             loader = iter(DataLoader(validation_data, batch_size=len(validation_data), shuffle=False))
             images, classes, pfeat = next(loader)
-            if not args.csv: preds  = model(images)
-            else: preds = model(images, pfeat)
+            preds  = model(images)
             out = loss(preds, classes)
             
             classes = np.asarray(classes.cpu())
-            
-            if out_classes != 1:
-                _, _, f1, _ = precision_recall_fscore_support(classes, preds, average=None, zero_division=1)
-                crit = f1[1]
-            else:
-                preds = torch.reshape(act(preds), (-1,)).cpu()
-                crit = root_mean_squared_error(classes, preds)
+           
+            preds = torch.reshape(act(preds), (-1,)).cpu()
+            crit = root_mean_squared_error(classes, preds)
 
             val_crit = crit
             print(f"Epoch {e + 1}: Validation Loss {out.item()} - Validation Criteria {val_crit}")
@@ -161,21 +142,19 @@ def train(args):
 def test(args, explain):
 
     # LOAD DATA
-    if args.csv: model_name = f'{args.base}_{args.model}_{args.bhk}_{args.labels}_split{args.split}'
-    else: model_name = f'{args.base}_{args.model}_{args.labels}_split{args.split}'
-    test_data = DysgraphiaDL(args.base, 'test', DEVICE, args.csv, args.bhk, args.labels, args.split)
+    model_name = f'{args.model}_{args.labels}_split{args.split}'
+    test_data = DysgraphiaDL(args.aug, 'test', DEVICE)
 
-    out_classes = 2
-    if args.labels == 'professors': out_classes = 1
+    out_classes = 1
 
     # LOAD MODEL
     if args.model == 'vit':
-        wrapper = ViTWrapper(model_name, DEVICE, out_classes, pen_features=test_data.pen_features)
+        wrapper = ViTWrapper(model_name, DEVICE, out_classes)
     elif args.model == 'resnet':
-        wrapper = ResnetWrapper(model_name, DEVICE, out_classes, False, test_data.pen_features)
+        wrapper = ResnetWrapper(model_name, DEVICE, out_classes, False)
     else:
         raise Exception(f'{model} is not a model: selecte either vit or resnet.')
-    if args.csv: wrapper.set_csv_model(args.model)
+    
     wrapper.load_state(f'{model_name}_model_best.pth')
     model = wrapper.get_model()
 
@@ -186,16 +165,13 @@ def test(args, explain):
 
         def predict(imgs, pfeat):
             if isinstance(imgs, np.ndarray): imgs = torch.tensor(imgs).to(DEVICE)
-            if not args.csv: preds  = model(images)
-            else: preds = model(images, pfeat)
+            preds  = model(images)
             return preds
         
         out = predict(images, pfeat)
 
-    if out_classes != 1: preds = np.argmax(out.cpu(), axis=1)
-    else: 
-        act = Sigmoid()
-        preds = torch.reshape(act(out), (-1,)).cpu()
+    act = Sigmoid()
+    preds = torch.reshape(act(out), (-1,)).cpu()
     classes = np.asarray(classes.cpu())
 
     print(f"Test Results {model_name}")
@@ -204,18 +180,17 @@ def test(args, explain):
     print("Classes: ", classes)
     print("---")
 
-    if out_classes != 1:
-        precision, recall, f1, _ = precision_recall_fscore_support(classes, preds, average='macro')
-        accuracy = accuracy_score(classes, preds)
+    preds_binary = (preds >= 0.5).astype(int)
+    precision, recall, f1, _ = precision_recall_fscore_support(classes, preds_binary, average='macro')
+    accuracy = accuracy_score(classes, preds)
 
-        print("Precision:", round(precision, 3))
-        print("Recall:", round(recall, 3))
-        print("F1:", round(f1, 3))
-        print("Accuracy:", round(accuracy, 3))
-    
-    else:
-        mse = root_mean_squared_error(classes, preds)
-        print("Mean Squarred Error:", round(mse, 3))
+    print("Precision:", round(precision, 3))
+    print("Recall:", round(recall, 3))
+    print("F1:", round(f1, 3))
+    print("Accuracy:", round(accuracy, 3))
+
+    mse = root_mean_squared_error(classes, preds)
+    print("Mean Squarred Error:", round(mse, 3))
 
     if explain:
         topk = 2
