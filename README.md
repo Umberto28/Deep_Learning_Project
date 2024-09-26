@@ -1,4 +1,4 @@
-# Riconoscimento della Disgrafia con Machine Learning e Deep Learning
+# Riconoscimento della Disgrafia con tecniche di Machine Learning e Deep Learning
 
 Questo repository contiene il codice e i materiali relativi ad un progetto sullo sviluppo di modelli di machine learning e deep learning per il riconoscimento automatico della disgrafia a partire da immagini di testo scritto a mano.
 
@@ -16,7 +16,7 @@ La disgrafia è un Disturbo Specifico dell'Apprendimento (DSA) che compromette l
 
 4. **Classificazione con Deep Learning**: È stata utilizzata l'architettura ResNet18, pre-addestrata sul dataset IAM, per la classificazione delle immagini. Il modello è stato successivamente addestrato sui dati di disgrafia, con due scenari di training: uno sui campioni originali e uno con un approccio incrementale sui campioni aumentati.
 
-## Librerie Utilizzate
+## Principali Librerie Utilizzate
 
 - `scikit-learn`
 - `tensorflow`
